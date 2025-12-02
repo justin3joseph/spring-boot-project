@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker-node' }
 
     stages {
 
@@ -23,9 +23,25 @@ pipeline {
             }
         }
 
-        stage('Package') {
+        stage('Docker Build') {
             steps {
-                echo "JAR file created inside the target folder"
+                script {
+                    sh '''
+                    docker build -t devops-demo:latest .
+                    '''
+                }
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                script {
+                    // Stop container if already running
+                    sh '''
+                    docker rm -f devops-demo-container || true
+                    docker run -d -p 9090:8080 --name devops-demo-container devops-demo:latest
+                    '''
+                }
             }
         }
     }
