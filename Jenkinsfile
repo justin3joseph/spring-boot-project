@@ -7,7 +7,7 @@ pipeline {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/justin3joseph/spring-boot-project.git',
-                    credentialsId: 'github-token'
+                    credentialsId: 'github-creds'
             }
         }
 
