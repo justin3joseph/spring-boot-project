@@ -8,6 +8,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Spring Boot CI/CD Pipeline Works!";
+        return "Spring Boot CI/CD Pipeline Works, Thanks for doing job...!";
     }
 }
